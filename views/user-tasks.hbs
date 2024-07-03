@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-tasks</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+        }
+        p, h2 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px;
+            width: 10%;
+            box-sizing: border-box;
+        }
+    </style>
+
+</head>
+<body>
+    
+ {{#if error}}
+        <p style="color: red;">{{error}}</p>
+    {{/if}}
+    {{#if user}}
+        <div class="container">
+            <h2>Tasks for {{user.name}}</h2>
+            <ul>
+                {{#each tasks}}
+                <li>
+                    <strong>Task Name:</strong> {{this.task_name}}<br>
+                    <strong>Task Type:</strong> {{this.task_type}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+    <button onclick="window.location.href='/add-task'">Back to Add Task</button>
+
+</body>
+</html>

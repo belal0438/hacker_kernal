@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Task</title>
+
+<style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+        }
+
+        form > h3{
+          text-align: center;
+        }
+
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body style="">
+    {{#if error}}
+        <p style="color: red;">{{error}}</p>
+    {{/if}}
+    {{#if success}}
+        <p style="color: green;">{{success}}</p>
+    {{/if}}
+    <form id="userForm" action="/add-user" method="POST">
+     <h3>Create User</h3>
+  <input type="text" name="name" placeholder="Name" required>
+  <input type="email" id="email" name="email" placeholder="Email" required>
+  <input type="text" id="mobile" name="mobile" placeholder="Mobile" required>
+  <button type="submit">Add User</button>
+</form>
+
+</body>
+ <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const mobilePattern = /^[0-9]{10}$/;
+
+            if (!emailPattern.test(email)) {
+                event.preventDefault();
+                alert('Invalid email format');
+            }
+
+            if (!mobilePattern.test(mobile)) {
+                event.preventDefault();
+                alert('Invalid mobile number');
+            }
+        });
+    </script>
+</html>

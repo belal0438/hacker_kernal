@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+
+<style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .export-button{
+           margin-top: 0.5rem;
+        }
+
+    .user-tasks-links{
+        margin-left: 1rem;
+    }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+        }
+
+        form > h3{
+            text-align: center;
+        }
+
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="firstDiv">
+  {{#if error}}
+        <p style="color: red;">{{error}}</p>
+    {{/if}}
+    {{#if success}}
+        <p style="color: green;">{{success}}</p>
+    {{/if}}
+    <form action="/add-task" method="POST">
+     <h3>Create Task</h3>
+        <select name="user_id" required>
+            {{#each users}}
+            <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        <input type="text" name="task_name" placeholder="Task Name" required>
+        <select name="task_type" required>
+            <option value="Pending">Pending</option>
+            <option value="Done">Done</option>
+        </select>
+        <button type="submit">Add Task</button>
+    </form>
+     <div class="export-button">
+        <button onclick="window.location.href='/export-users-tasks'">Export Users and Tasks</button>
+    </div>
+    </div>
+    <div class="user-tasks-links">
+        {{#each users}}
+        <button onclick="window.location.href='/user/{{this.id}}/tasks'">View Tasks for {{this.name}}</button>
+        {{/each}}
+    </div>
+</body>
+</html>
