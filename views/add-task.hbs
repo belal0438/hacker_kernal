@@ -18,6 +18,11 @@
 
     .user-tasks-links{
         margin-left: 1rem;
+        display: flex;
+        justify-content: space-between;
+    }
+    #viewTasksButton{
+        margin-left: 8px;
     }
 
         form {
@@ -70,9 +75,23 @@
     </div>
     </div>
     <div class="user-tasks-links">
-        {{#each users}}
-        <button onclick="window.location.href='/user/{{this.id}}/tasks'">View Tasks for {{this.name}}</button>
-        {{/each}}
+        <select name="user_id" id="userSelectForTasks" required>
+            <option value="">Select User</option>
+            {{#each users}}
+            <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        <button id="viewTasksButton">View Tasks</button>
     </div>
 </body>
+
+<script>
+    document.getElementById('userSelectForTasks').addEventListener('change', function() {
+        const selectedUserId = this.value;
+        const viewTasksButton = document.getElementById('viewTasksButton');
+        viewTasksButton.onclick = function() {
+            window.location.href = '/user/' + selectedUserId + '/tasks';
+        };
+    });
+</script>
 </html>

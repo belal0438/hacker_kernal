@@ -14,7 +14,7 @@ const creatUser = async (req, res) => {
   try {
     const { name, email, mobile } = req.body;
 
-    console.log(">>>>>>>>>>", name, email, mobile);
+    // console.log(">>>>>>>>>>", name, email, mobile);
 
     if (
       IsStringInvalid(name) ||
